@@ -54,7 +54,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-ApolloProvider ialah ```container``` untuk menggunakan Apollo Client dalam paparan pokok React dan ditetapkan props ```client``` padanya.
+ApolloProvider ialah ```container``` untuk menggunakan Apollo Client dalam hierarki paparan React dan ditetapkan props ```client``` padanya.
 
 ###### SUNTING FAIL App.js
 Buka fail ```src/App.js``` dan import ```graphql-tag``` dan ```react-apollo```:
@@ -90,7 +90,7 @@ const TodowithData = graphql(GET_TODO, {
 // mutation
 ...
 ```
-Pada kod diatas kita telah membuat query untuk mengembalikan semua todos dan telah menetapkan pollInterval 1000ms yang akan refetch query setiap 1000ms. Kemudian, props todos akan diberikan kepada komponen App.
+Pada kod diatas kita telah membuat ```graphql container``` untuk menjalankan query bagi mengembalikan semua todos pada komponen ```App``` dan telah menetapkan pollInterval 1000ms yang akan refetch query setiap 1000ms.
 
 Kemudian, buat method ```render()``` pada komponen ```App``` untuk memaparkan semua todo kepada pengguna:
 ```javascript
@@ -105,7 +105,7 @@ render() {
     <div className="App">
     <h1>Todo App</h1>
     // form here
-    
+
       <ul>
         {
           _.map(todos, (todo) => {
@@ -146,7 +146,7 @@ const TodoWithDataAndMutations = graphql(TODO_MUTATION, {
   },
 })(TodowithData);
 ```
-Kod mutation diatas akan membuat task baru mengikut input pengguna.
+Sama juga seperti membuat operasi query yang menggunakan ```graphql container```, kod mutation diatas akan membuat task baru mengikut input pengguna.
 
 Kemudian, eksport komponen ```App``` termasuk operasi yang telah ditetapkan:
 ```javascript
