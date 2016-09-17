@@ -19,7 +19,9 @@ Selepas itu, pasang npm dependency ```passport``` dan ```passport-http-bearer```
 npm install --save passport passport-http-bearer
 ```
 
-###### Tambah schema token pada fail ```connectors.js```.
+##### Membuat Sequelize schema pada fail ```connectors.js```.
+
+###### Tambah schema token.
 Kemudian, kita perlu membuat schema baru untuk menyimpan token pengguna pada pangkalan data SQL.
 ```javascript
 const TokenModel = db.define('tokens', {
@@ -45,7 +47,9 @@ const Tokens = db.models.tokens;
 export { ..., Tokens };
 ```
 
-###### Import ```passport``` dan ```passport-http-bearer``` serta ```Tokens``` model pada fail ```server.js```.
+##### Menambah konfigurasi Pengesahan Bearer pada fail ```server.js```.
+
+###### Import ```passport``` dan ```passport-http-bearer``` serta ```Tokens``` model`.
 Import kesemua dependency yang diperlukan berikut.
 ```javascript
 import passport from 'passport';
@@ -53,7 +57,7 @@ import Strategy from 'passport-http-bearer';
 import { Tokens } from './connectors';
 ```
 
-###### Membuat kongfigurasi Strategi Bearer.
+###### Membuat konfigurasi Strategi Bearer.
 Strategi Bearer memerlukan ```token bearer``` untuk memberi akses kepada pengguna. Ia akan mencari token bearer yang wujud pada pangkalan data SQL yang telah dibuat dan akan membuat callback sama ada pengesahan berjaya atau tidak.
 ```javascript
 passport.use(new Strategy(
