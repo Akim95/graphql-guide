@@ -4,7 +4,7 @@ taxonomy:
     category: docs
 ---
 
-Kita akan membuat pelayan GraphQL HTTP dengan express framework dalam langkah ini. Buat satu fail ```server.js``` dalam direktori projek dan tulis kod berikut pada fail tersebut:
+Kita akan membuat pelayan GraphQL dengan Menggunakan express framework dalam langkah ini. Buat satu fail dengan nama ```server.js``` dalam direktori projek dan tulis kod berikut pada fail tersebut:
 ```javascript
 import express from 'express';
 import graphQLHTTP from 'express-graphql';
@@ -21,12 +21,12 @@ app.listen(GraphQLPort, () => {
   console.log(`GraphQL server run on port ${GraphQLPort}`);
 });
 ```
-Apa yang kita buat:
+Apa yang kita telah buat?
 * Import ```express``` dan ```express-graphql```.
 * Istihar port ```4000``` pada pembolehubah ```GraphQLPort```.
 * Istihar express pada pembolehubah ```app```.
-* Menggunakan express dengan route ```/graphql``` dan menetapkan express-graphql sebagai middleware.
-* graphQLHTTP dengan opsyen ```graphiql``` ```true``` yang mana untuk memberi kita akses kepada graphiql dan juga menetapkan ```pretty``` kepada ```true``` untuk mencetak kemas JSON pada query.
+* Menggunakan express dengan route/endpoint ```/graphql``` dan menetapkan express-graphql sebagai middleware.
+* graphQLHTTP dengan opsyen ```graphiql``` ```true``` yang mana untuk memberi kita akses kepada graphiql dan juga menetapkan ```pretty``` kepada ```true``` untuk mencetak kemas query pada GraphiQL.
 * Binds dan listen untuk sambungan mengikut port yang telah ditetapkan.
 
 

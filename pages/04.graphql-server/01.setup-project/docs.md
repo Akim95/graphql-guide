@@ -26,7 +26,7 @@ ia akan membuat ```package.json``` yang mana memberi tahu kepada [npm](https://w
 ###### Memasang babel.
 Kemudian pasang Babel:
 ```bash
-npm install --save babel babel-core babel-preset-es2015
+npm install --save-dev babel-cli babel-preset-es2015
 ```
 [Babel](https://babeljs.io/) ialah Javascript compiler. Ia membolehkan anda menggunakan kod ```ES2015``` iaitu versi terkini untuk Javascript (ECMAScript) dan membuatkannya berfungsi pada semua pelayar web walaupun pelayar web tidak menyokong ES2015. Babel akan compile dari kod ES2015 ke kod ```ES5```.
 
@@ -34,6 +34,12 @@ npm install --save babel babel-core babel-preset-es2015
 Seterusnya memasang Express iaitu framework untuk Node.js:
 ```bash
 npm install --save express
+```
+
+###### Memasang nodemon
+Kemudian, kita perlu memasang nodemon sebagai pelayan pembangunan ia akan memantau perubahan pada setiap fail node aplikasi dan akan restart pelayan jika terdapat perubahan.
+```bash
+npm install --save-dev nodemon
 ```
 
 ###### Memasang graphql dan express-graphql.
@@ -65,12 +71,14 @@ keputusan akan seperti berikut:
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.10.4",
-    "babel-preset-es2015": "^6.9.0",
     "express": "^4.14.0",
-    "express-graphql": "^0.5.3",
-    "graphql": "^0.6.0"
+    "express-graphql": "^0.5.4",
+    "graphql": "^0.7.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-cli": "^6.14.0",
+    "nodemon": "^1.10.2"
   }
 }
 ```
@@ -84,20 +92,13 @@ keputusan akan seperti berikut:
 ```
 
 ###### Tambah start script.
-Kemudian buka pula fail ```package.json``` dan pada objek ```scripts``` tambah baris berikut pada scripts:
+Kemudian buka fail ```package.json``` dan pada objek ```scripts``` tambah baris berikut pada scripts:
 ```json
 "scripts": {
-  "start": "node index.js",
+  "start": "nodemon server --exec babel-node",
   // more...
 },
 // more...
-```
-
-###### Membuat fail index.js.
-Akhir sekali buat fail dengan nama ```index.js``` dan tulis kod berikut:
-```
-require('babel-core/register');
-require('./server.js');
 ```
 
 ###### Kod sumber untuk projek ini sebagai rujukan:

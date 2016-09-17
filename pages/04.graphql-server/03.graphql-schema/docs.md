@@ -4,20 +4,14 @@ taxonomy:
     category: docs
 ---
 
-Dalam langkah ini kita akan menulis schema pertama kita untuk operasi query. Pertama sekali kita perlu membuat fail ```schema.js``` pada direktori projek. Selepas itu, tulis semua kod dibawah.
+Dalam langkah ini kita akan menulis schema pertama kita untuk operasi query. Pertama sekali kita perlu membuat fail dengan nama ```schema.js``` pada direktori projek. Selepas itu, tulis semua kod berikut.
 
-######  Import modul graphql/type.
-import jenis graphql yang diperlukan:
+######  Import GraphQL buildSchema.
+Ia akan digunakan untuk membina schema untuk GraphQL.
 ```javascript
-import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLList,
-  GraphQLInt,
-  GraphQLString,
-  GraphQLBoolean,
-} from 'graphql/type';
+import { buildSchema } from 'graphql';
 ```
+
 ###### Import data Todos.
 Kemudian, import data ```Todos``` daripada ```data.js```:  
 nota: Kita akan membuat fail data.js kemudian.
@@ -25,50 +19,34 @@ nota: Kita akan membuat fail data.js kemudian.
 import { Todos } from './data';
 ```
 
-###### Membuat jenis todo (Todo Type).
-Istihar jenis todo pada pembolehubah ```TodoType```. Membuat jenis todo dengan ```new GraphQLObjectType``` yang terkandung dengan beberapa ```medan``` padanya. Kita menentukan 3 jenis medan iaitu ```id``` dengan jenis data ```Integer```, ```task``` dengan jenis data ```String``` dan ```completed``` dengan jenis data ```Boolean```.
+###### Membuat schema untuk Todo.
+Kita akan membuat schema dengan menggunakan bahasa GraphQL schema. Tulis kod berikut:
 ```javascript
-const TodoType = new GraphQLObjectType({
-  name: 'Todo',
-  fields: () => ({
-    id: {
-      type: GraphQLInt,
-    },
-    task: {
-      type: GraphQLString,
-    },
-    completed: {
-      type: GraphQLBoolean,
-    },
-  }),
-});
+const schema = buildSchema(`
+  type TodoType {
+    _id: Int
+    task: String
+    completed: Boolean
+  }
+  type Query {
+    todos: [TodoType]
+  }
+  `);
 ```
 
-###### Membuat root query.
-Pada langkah ini kita perlu menggunakan ```method resolve``` yang mana digunakan oleh GraphQL apabila query dijalankan (akan kembalikan data daripada sumber data). Sama seperti membuat ```TodoType``` dengan menggunakan ```new GraphQLObjectType``` disini kita mengistihar 1 medan iaitu ```todos``` yang mana untuk kita query kesemua data yang ada pada Todos.
-
-Medan:
-* ```todos``` kita menentukan ```new GraphQLList(TodoType)``` sebagai jenis todos yang mana akan mengembalikan kesemua objek ```TodoType``` dalam senarai. Resolve akan mengembalikan kesemua data pada todo.
+###### Membuat resolver bagi setiap endpoint.
+Kita akan membuat resolver bagi ```todos``` yang akan mengembalikan senarai Todos dari sumber data. Tulis kod berikut:
 ```javascript
-    const RootQuery = new GraphQLObjectType({
-      name: 'RootQuery',
-      fields: () => ({
-        todos: {  
-          type: new GraphQLList(TodoType),
-          resolve() {
-            return Todos;
-          },
-        },
-      }),
-    });
+const root = {
+    todos: () => {
+      return Todos;
+    },
+};
 ```
 
-###### Mengeksport GraphQL schema.
-Sekarang kita akan mengeksport ```GraphQLSchema```, sebelum itu kita tentukan operasi ```query``` dengan ```RootQuery``` pada ```new GraphQLSchema```.
+###### Eksport schema dan root.
 ```javascript
-export default new GraphQLSchema({
-  query: RootQuery,
-});
+export { schema, root };
 ```
 
 ###### Membuat fail Data.
@@ -86,35 +64,34 @@ export { Todos };
 ```
 
 ###### Import schema.
-Sebelum kita menjalankan pelayan GraphQL ini. Kita perlu mengimport ```schema``` pada fail ```server.js``` serta istiharkan ia pada opsyen graphQLHTTP.
+Sebelum kita menjalankan pelayan GraphQL ini. Kita perlu mengimport ```schema``` dan ```root``` pada fail ```server.js``` serta menetapkan pada ```graphQLHTTP```.
 
 ```javascript
 // import express from 'express';
 // import graphQLHTTP from 'express-graphql';
-
-// import schema
-import schema from './schema';
-
-//  const GraphQLPORT = 4000;
-//  const app = express();
-
+import { schema, root } from './schema';
+//
+// const GraphQLPORT = 4000;
+// const app = express();
+//
 // app.use('/graphql', graphQLHTTP({
-//  graphiql: true,
-//  pretty: true,
-    schema, // es6 object-shorthand
+//   graphiql: true,
+//   pretty: true,
+  rootValue: root,
+  schema,
 // }));
-
-//  app.listen(GraphQLPORT, () => {
-//  console.log(`GraphQL server run on port ${GraphQLPORT}`);
-//  });
+//
+// app.listen(GraphQLPORT, () => {
+//   console.log(`GraphQL server run on port ${GraphQLPORT}`);
+// });
 ```
 
 ###### Jalankan pelayan dan query.
-Ok, mari kita cuba menjalankan pelayan GraphQL berikut:
+Sekarang mari kita cuba menjalankan pelayan GraphQL berikut:
 ```
 npm start
 ```
-Jika tiada sebarang ralat pada terminal, cuba buka url ini [http://localhost:4000/graphql/](http://localhost/graphql/) pada pelayar web. Dan cuba jalankan query berikut:
+Jika tiada sebarang ralat pada terminal, cuba buka url ini [http://localhost:4000/graphql](http://localhost:4000/graphql) pada pelayar web. Dan cuba jalankan query berikut:
 
 ```
 {
