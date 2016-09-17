@@ -4,6 +4,6 @@ taxonomy:
     category: docs
 ---
 
-### Bab 6
+### Bab 7
 
 # Informasi Tambahan
