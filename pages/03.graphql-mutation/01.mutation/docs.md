@@ -4,7 +4,7 @@ taxonomy:
     category: docs
 ---
 
-Selain operasi query, GraphQL juga boleh menjalankan operasi mutation yang mana kita boleh membuat operasi ```write``` seperti membuat, mengemaskini dan memadam data. Sintaks mutation juga lebih kurang seperti operasi query. Dengan menggunakan pelayan GraphQL yang sama seperti tutorial yang sebelum ini [[Link](http://belajargraphql.herokuapp.com)].
+Selain operasi query, GraphQL juga boleh menjalankan operasi mutation yang mana kita boleh membuat operasi ```write``` seperti membuat, mengemaskini dan memadam data. Sintaks mutation juga lebih kurang seperti operasi query. Dengan menggunakan pelayan GraphQL yang sama seperti guide yang sebelum ini [[Link](http://belajargraphql.herokuapp.com)].
 
 Mari kita jalankan mutation berikut:
 ```

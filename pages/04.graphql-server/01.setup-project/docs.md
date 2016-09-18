@@ -4,7 +4,7 @@ taxonomy:
     category: docs
 ---
 
-Kita akan membuat pelayan GraphQL untuk aplikasi Todo. Pertama sekali pastikan anda telah memasang ```Node.js``` pada komputer anda jika belum anda boleh memuat turun dilaman web rasmi [Node.js](https://nodejs.org/en/). Jika selesai memasang Node.js kita perlu membuat satu folder baru dengan nama ```todo-graphql-server``` atau terpulang kepada anda. Dalam tutorial ini kita menggunakan Node.js untuk membangunkan pelayan GraphQL.
+Kita akan membuat pelayan GraphQL untuk aplikasi Todo. Pertama sekali pastikan anda telah memasang ```Node.js``` pada komputer anda jika belum anda boleh memuat turun dilaman web rasmi [Node.js](https://nodejs.org/en/). Jika selesai memasang Node.js kita perlu membuat satu folder baru dengan nama ```todo-graphql-server``` atau terpulang kepada anda. Dalam guide ini kita menggunakan Node.js untuk membangunkan pelayan GraphQL.
 
 ###### Membuat folder projek.
 ```

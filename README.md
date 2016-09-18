@@ -1,1 +1,1 @@
-## GraphQL Tutorial dalam bahasa Malaysia
+## GraphQL Guide dalam bahasa Malaysia.
