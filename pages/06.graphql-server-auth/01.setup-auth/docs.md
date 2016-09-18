@@ -35,6 +35,7 @@ const TokenModel = db.define('tokens', {
 //     task: 'demo data',
 //     completed: false,
 //   });
+// this will create a new initial token for bearer auth
   TokenModel.create({
     token: '402bd0d6-59ac-447f-af4c-f9bc61691dae',
   });
@@ -63,10 +64,14 @@ Strategi Bearer memerlukan ```token bearer``` untuk memberi akses kepada penggun
 passport.use(new Strategy(
   function (token, cb) {
     Tokens.findOne({
-      token,
+      where: {
+        token
+      },
     }).then(function (user) {
+      console.log(user);
       return cb(null, user);
     }).catch(function (err) {
+      console.log(err);
       return cb(err);
     });
   }
@@ -85,3 +90,9 @@ Tambah ```passport.authenticate()``` dengan ditetapkan strategi 'bearer' untuk p
   //   schema,
   // }));
   ```
+
+###### Mencuba pengesahan.
+Kita akan menggunakan ```curl``` untuk mencuba pengesahan.
+```bash
+curl -v -H "Authorization: Bearer 402bd0d6-59ac-447f-af4c-f9bc61691dae" http://localhost:4000/graphql/
+```
