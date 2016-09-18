@@ -4,7 +4,7 @@ taxonomy:
     category: docs
 ---
 
-Kita akan membuat pengesahan untuk akses kepada pelayan GraphQL. Tiada sebarang pengesahan yang kursus terbina untuk pelayan GraphQL kita bebas untuk menggunakan apa sahaja kaedah untuk pengesahan. Kita akan menggunakan kaedah ```HTTP Bearer Auth``` dengan menggunakan [passport.js](http://passportjs.org).
+Kita akan membuat pengesahan untuk akses kepada pelayan GraphQL. Tiada sebarang pengesahan yang khusus terbina untuk pelayan GraphQL kita bebas untuk menggunakan apa sahaja kaedah untuk pengesahan. Kita akan menggunakan kaedah ```HTTP Bearer Auth``` dengan menggunakan [passport.js](http://passportjs.org).
 
 ###### Clone direktori projek.
 Pertama sekali clone projek pelayan graphql todo berikut dan tukar ke branch ```data-source```.
